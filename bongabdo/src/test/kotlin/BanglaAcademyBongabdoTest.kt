@@ -7,14 +7,6 @@ import java.util.Calendar
 
 class BanglaAcademyBongabdoTest {
 
-    private fun assertBongabdoDate(year: Int, month: Int, day: Int, expectedDate: String) {
-        val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.BANGLA_ACADEMY)
-        val calendar: Calendar = Calendar.getInstance()
-
-        calendar.set(year, month, day)
-        assertEquals(expectedDate, bongabdo.getBongabdoData(calendar).getFullDate())
-    }
-
     @ParameterizedTest
     @CsvSource(
         "2020, 0, 1, '১৭ পৌষ, ১৪২৬'",
@@ -90,5 +82,13 @@ class BanglaAcademyBongabdoTest {
     )
     fun testBongabdo_specialDays_nonLeapYear(year: Int, month: Int, day: Int, expectedDate: String) {
         assertBongabdoDate(year, month, day, expectedDate)
+    }
+
+    private fun assertBongabdoDate(year: Int, month: Int, day: Int, expectedDate: String) {
+        val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.BANGLA_ACADEMY)
+        val calendar: Calendar = Calendar.getInstance()
+
+        calendar.set(year, month, day)
+        assertEquals(expectedDate, bongabdo.getBongabdoData(calendar).getFullDate())
     }
 }
