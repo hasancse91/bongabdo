@@ -2,11 +2,12 @@ package com.hellohasan.bongabdo.bongabdo_method.bangla_academy
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
-import com.hellohasan.bongabdo.util.diffInDays
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 import kotlin.math.floor
 
-class BanglaAcademyBongabdo : Bongabdo() {
+internal class BanglaAcademyBongabdo : Bongabdo() {
 
     private val banglaAcademyConfig = BanglaAcademyConfig()
 
@@ -76,4 +77,7 @@ class BanglaAcademyBongabdo : Bongabdo() {
         return gregYear
     }
 
+    private fun Calendar.diffInDays(end: Calendar): Long {
+        return TimeUnit.MILLISECONDS.toDays(abs(end.timeInMillis - this.timeInMillis))
+    }
 }

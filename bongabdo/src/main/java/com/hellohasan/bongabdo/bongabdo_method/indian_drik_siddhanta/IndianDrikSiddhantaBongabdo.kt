@@ -1,4 +1,4 @@
-package com.hellohasan.bongabdo.bongabdo_method.india_drik_siddhanta
+package com.hellohasan.bongabdo.bongabdo_method.indian_drik_siddhanta
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
@@ -15,7 +15,7 @@ import kotlin.math.tan
 /**
  * Credit: https://www.ponjika.com/jsDrik.aspx
  */
-class IndiaDrikSiddhantaBongabdo : Bongabdo() {
+internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
 
     private val d2r = PI / 180
     private val r2d = 180 / PI

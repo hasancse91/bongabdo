@@ -1,7 +1,7 @@
 package com.hellohasan.bongabdo.api
 
 import com.hellohasan.bongabdo.bongabdo_method.bangla_academy.BanglaAcademyBongabdo
-import com.hellohasan.bongabdo.bongabdo_method.india_drik_siddhanta.IndiaDrikSiddhantaBongabdo
+import com.hellohasan.bongabdo.bongabdo_method.indian_drik_siddhanta.IndianDrikSiddhantaBongabdo
 import com.hellohasan.bongabdo.localization_config.BengaliLocalizationConfig
 import com.hellohasan.bongabdo.localization_config.BongabdoLocalizationConfig
 import java.util.Calendar
@@ -22,7 +22,7 @@ abstract class Bongabdo {
         fun getInstance(method: BongabdoMethod): Bongabdo {
             return when (method) {
                 BongabdoMethod.BANGLA_ACADEMY -> BanglaAcademyBongabdo()
-                BongabdoMethod.INDIAN_DRIK_SIDDHANTA -> IndiaDrikSiddhantaBongabdo()
+                BongabdoMethod.INDIAN_DRIK_SIDDHANTA -> IndianDrikSiddhantaBongabdo()
             }
         }
     }

@@ -13,12 +13,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoMethod
+import com.hellohasan.bongabdo.localization_config.BengaliLocalizationConfig
+import com.hellohasan.bongabdo.localization_config.EnglishLocalizationConfig
 import com.hellohasan.bongabdosample.ui.theme.BongabdoSampleTheme
 import java.util.Calendar
 
 class MainActivity : ComponentActivity() {
 
-    val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.BANGLA_ACADEMY)
+    private val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.BANGLA_ACADEMY).apply {
+        mLocalizationConfig = BengaliLocalizationConfig()
+//        mLocalizationConfig = EnglishLocalizationConfig()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
