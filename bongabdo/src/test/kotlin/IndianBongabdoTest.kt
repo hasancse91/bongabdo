@@ -132,7 +132,7 @@ class IndianBongabdoTest {
     }
 
     private fun assertBongabdoDate(year: Int, month: Int, day: Int, expectedDate: String) {
-        val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.INDIA_DRIK_SIDDHANTA)
+        val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.INDIAN_DRIK_SIDDHANTA)
         val calendar: Calendar = Calendar.getInstance()
 
         calendar.set(year, month, day)
