@@ -1,8 +1,7 @@
-package com.hellohasan.bongabdo.bongabdo_method.india
+package com.hellohasan.bongabdo.bongabdo_method.india_drik_siddhanta
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
-import com.hellohasan.bongabdo.bongabdo_method.BongabdoCoreConfig
 import java.util.Calendar
 import kotlin.math.PI
 import kotlin.math.abs
@@ -13,7 +12,10 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
 
-class IndiaBongabdo : Bongabdo() {
+/**
+ * Credit: https://www.ponjika.com/jsDrik.aspx
+ */
+class IndiaDrikSiddhantaBongabdo : Bongabdo() {
 
     private val d2r = PI / 180
     private val r2d = 180 / PI
@@ -153,12 +155,7 @@ class IndiaBongabdo : Bongabdo() {
         Corr2(0.092, 3, 0, 2, -2),
     )
 
-    override fun getBongabdoCoreConfig(): BongabdoCoreConfig {
-        return IndianBongabdoCoreConfig()
-    }
-
     override fun getBongabdoData(calendar: Calendar): BongabdoData {
-        // println(calendar.time)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val mon = calendar.get(Calendar.MONTH) + 1
         val year = calendar.get(Calendar.YEAR)
@@ -171,25 +168,15 @@ class IndiaBongabdo : Bongabdo() {
         dTime(jdut)
         val jd = jdut + 6 / 24.0
 
-        // println("jd: $jd")
-        // println("jd0: $jd0")
-        // println("jdut: $jdut")
-        // println("dt: $dt")
-
         ayanamsa = calcayan(jd)
         Lmoon = moon(jd)
         sun(jd)
-
-        // println("ayanamsa: $ayanamsa")
-        // println("Lmoon: $Lmoon")
-        // println("Lsun: $Lsun")
 
         val bjdut = jd0 + (6 - 6) / 24.0
         val bjd = bjdut + 6 / 24.0
         val (bongabdoDate: Int, bongabdoMonthIndex: Int, bongabdoYear: Int) = banglaMas(bjd)
 
         val seasonIndex = (floor(bongabdoMonthIndex / 2.0).toInt()) % 6
-        // println("season index $seasonIndex $bongabdoMonthIndex")
         val seasonName = mLocalizationConfig.seasonNameList[seasonIndex]
         val yearName = mLocalizationConfig.toLocalizedNumber(bongabdoYear)
         val monthName = mLocalizationConfig.monthNameList[bongabdoMonthIndex]
@@ -237,18 +224,16 @@ class IndiaBongabdo : Bongabdo() {
             date1.get(Calendar.YEAR)
         ) + 0.25
         val tm1 = poilaMas(cm1)
-        // println("Poila mas before $tm1")
-        // println("jd before $jd")
+
 
         var st = floor(jd) - floor(tm1) + 1
         val bLsun = sun(jd)
         val bayanamsa = calcayan(jd)
         var bmon = floor(fix360(bLsun + bayanamsa) / 30) + 1
-        // println("Bangla day before $st")
+
         if (floor(tm1) > floor(jd)) {
             st = floor(jd) - floor(tm2) + 1
             bmon -= 1
-            // println("Bangla day after $st")
         }
         // Adjust bmon to handle negative index
         var bmonIndex = bmon.toInt() - 1

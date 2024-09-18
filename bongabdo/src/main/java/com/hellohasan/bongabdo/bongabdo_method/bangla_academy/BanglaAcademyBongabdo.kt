@@ -2,16 +2,13 @@ package com.hellohasan.bongabdo.bongabdo_method.bangla_academy
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
-import com.hellohasan.bongabdo.bongabdo_method.BongabdoCoreConfig
 import com.hellohasan.bongabdo.util.diffInDays
 import java.util.Calendar
 import kotlin.math.floor
 
 class BanglaAcademyBongabdo : Bongabdo() {
 
-    override fun getBongabdoCoreConfig(): BongabdoCoreConfig {
-        return BanglaAcademyCoreConfig()
-    }
+    private val banglaAcademyConfig = BanglaAcademyConfig()
 
     override fun getBongabdoData(calendar: Calendar): BongabdoData {
 
@@ -52,7 +49,7 @@ class BanglaAcademyBongabdo : Bongabdo() {
 
         var bongabdoMonthIndex = 0
 
-        val monthLengthList = mBongabdoCoreConfig.getMonthLengthList(calendar[Calendar.YEAR])
+        val monthLengthList = banglaAcademyConfig.getMonthLengthList(calendar[Calendar.YEAR])
         for (i in monthLengthList.indices) {
             if (dayRemaining <= monthLengthList[i]) {
                 bongabdoMonthIndex = i
