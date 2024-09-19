@@ -69,6 +69,37 @@ class IndianShurjoSiddhantaBongabdoTest {
         assertBongabdoDate(year, month, day, expectedDate)
     }
 
+    @ParameterizedTest
+    @CsvSource(
+        "2029, 3, 15, '১ বৈশাখ, ১৪৩৬'",
+        "2029, 4, 15, '৩১ বৈশাখ, ১৪৩৬'",
+        "2029, 4, 16, '১ জ্যৈষ্ঠ, ১৪৩৬'",
+        "2029, 5, 15, '৩১ জ্যৈষ্ঠ, ১৪৩৬'",
+        "2029, 5, 16, '১ আষাঢ়, ১৪৩৬'",
+        "2029, 6, 17, '৩২ আষাঢ়, ১৪৩৬'",
+        "2029, 6, 18, '১ শ্রাবণ, ১৪৩৬'",
+        "2029, 7, 17, '৩১ শ্রাবণ, ১৪৩৬'",
+        "2029, 7, 18, '১ ভাদ্র, ১৪৩৬'",
+        "2029, 8, 17, '৩১ ভাদ্র, ১৪৩৬'",
+        "2029, 8, 18, '১ আশ্বিন, ১৪৩৬'",
+        "2029, 9, 18, '৩১ আশ্বিন, ১৪৩৬'",
+        "2029, 9, 19, '১ কার্তিক, ১৪৩৬'",
+        "2029, 10, 17, '৩০ কার্তিক, ১৪৩৬'",
+        "2029, 10, 18, '১ অগ্রহায়ণ, ১৪৩৬'",
+        "2029, 11, 16, '২৯ অগ্রহায়ণ, ১৪৩৬'",
+        "2029, 11, 17, '১ পৌষ, ১৪৩৬'",
+        "2030, 0, 14, '২৯ পৌষ, ১৪৩৬'",
+        "2030, 0, 15, '১ মাঘ, ১৪৩৬'",
+        "2030, 1, 13, '৩০ মাঘ, ১৪৩৬'",
+        "2030, 1, 14, '১ ফাল্গুন, ১৪৩৬'",
+        "2030, 2, 15, '৩০ ফাল্গুন, ১৪৩৬'",
+        "2030, 2, 16, '১ চৈত্র, ১৪৩৬'",
+        "2030, 3, 14, '৩০ চৈত্র, ১৪৩৬'",
+    )
+    fun testBongabdo_Year_1436(year: Int, month: Int, day: Int, expectedDate: String) {
+        assertBongabdoDate(year, month, day, expectedDate)
+    }
+
     private fun assertBongabdoDate(year: Int, month: Int, day: Int, expectedDate: String) {
         val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.INDIAN_SHURJO_SIDDHANTA)
         val calendar: Calendar = Calendar.getInstance()
