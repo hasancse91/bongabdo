@@ -27,5 +27,9 @@ abstract class Bongabdo {
         }
     }
 
+    /**
+     * Input Gregorian calendar Data.
+     * [month] is 0-based. January=0, December=11
+     */
     abstract fun getBongabdoData(year: Int, month: Int, day: Int): BongabdoData
 }
