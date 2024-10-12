@@ -1,5 +1,6 @@
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoMethod
+import kotlinx.datetime.LocalDateTime
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -133,9 +134,8 @@ class IndianShurjoSiddhantaBongabdoTest {
 
     private fun assertBongabdoDate(year: Int, month: Int, day: Int, expectedDate: String) {
         val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.INDIAN_SHURJO_SIDDHANTA)
-        val calendar: Calendar = Calendar.getInstance()
+        val calendar = LocalDateTime(year, month + 1, day, 12, 0, 0)
 
-        calendar.set(year, month, day)
         Assertions.assertEquals(expectedDate, bongabdo.getBongabdoData(calendar).getFullDate())
     }
 }

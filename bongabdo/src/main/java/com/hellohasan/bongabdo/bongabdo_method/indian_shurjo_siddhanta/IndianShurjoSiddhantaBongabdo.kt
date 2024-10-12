@@ -2,11 +2,18 @@ package com.hellohasan.bongabdo.bongabdo_method.indian_shurjo_siddhanta
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.offsetAt
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import kotlin.math.floor
+import kotlin.time.Duration.Companion.microseconds
 
 class IndianShurjoSiddhantaBongabdo: Bongabdo() {
 
@@ -28,26 +35,37 @@ class IndianShurjoSiddhantaBongabdo: Bongabdo() {
         365.2587564814815
     )
 
-    override fun getBongabdoData(calendar: Calendar): BongabdoData {
-        calendar.timeInMillis += (calendar.timeZone.rawOffset + 360 * 60 * 1000).toLong()
+    override fun getBongabdoData(dateTime: LocalDateTime): BongabdoData {
+        // Get the system's current time zone
+        val systemTimeZone = TimeZone.currentSystemDefault()
 
-        val eday = calendar.get(Calendar.DAY_OF_MONTH)
-        val emonth = calendar.get(Calendar.MONTH) + 1
-        val eyear = calendar.get(Calendar.YEAR)
+        // Convert the LocalDateTime to an Instant in the system's time zone
+        val instant = dateTime.toInstant(systemTimeZone)
 
+        // Define the target time zone (UTC+6)
+        val targetTimeZone = TimeZone.of("UTC+06:00")
+
+        // Convert the Instant to a LocalDateTime in the target time zone
+        val dateTimeInUTCPlus6 = instant.toLocalDateTime(targetTimeZone)
+
+        // Extract the date components
+        val eyear = dateTimeInUTCPlus6.year
+        val emonth = dateTimeInUTCPlus6.monthNumber
+        val eday = dateTimeInUTCPlus6.dayOfMonth
+
+        // Calculate the Bangla date
         val bcal = banglaDate(eyear, emonth, eday) ?: Triple(0, 0, 0)
 
-        // Determine season, seasonName, yearName, monthName, dayName as per your requirements
-        // Assuming season is based on month, you might need to define how seasons are determined
-
+        // Determine the season based on the Bangla month
         val season = when (bcal.second) {
-            in 1..3 -> 1 // Example: Spring
+            in 1..3 -> 1 // Spring
             in 4..6 -> 2 // Summer
             in 7..9 -> 3 // Autumn
             in 10..12 -> 4 // Winter
             else -> 0
         }
 
+        // Map the season to its name
         val seasonName = when (season) {
             1 -> "Spring"
             2 -> "Summer"
@@ -56,16 +74,14 @@ class IndianShurjoSiddhantaBongabdo: Bongabdo() {
             else -> "Unknown"
         }
 
-        val yearName =  mLocalizationConfig.toLocalizedNumber(bcal.first.toString())
-        val monthName = mLocalizationConfig.monthNameList[bcal.second - 1] ?: "Unknown"
-        val dayName = mLocalizationConfig.toLocalizedNumber(bcal.third) // Example logic; adjust as needed
+        // Localize the year, month, and day
+        val yearName = mLocalizationConfig.toLocalizedNumber(bcal.first.toString())
+        val monthName = mLocalizationConfig.monthNameList.getOrNull(bcal.second - 1) ?: "Unknown"
+        val dayName = mLocalizationConfig.toLocalizedNumber(bcal.third.toString())
 
-        // Create a Calendar instance
-        val gregorianCalendar = Calendar.getInstance()
-        gregorianCalendar.set(eyear, emonth - 1, eday)
-
+        // Return the BongabdoData object with the computed values
         return BongabdoData(
-            calendar = gregorianCalendar,
+            calendar = dateTimeInUTCPlus6,
             season = season,
             year = bcal.first,
             month = bcal.second,
@@ -87,7 +103,7 @@ class IndianShurjoSiddhantaBongabdo: Bongabdo() {
             eMonth += 12
         }
 
-        var julianDay = Math.floor(365.25 * eYear) + Math.floor(30.59 * (eMonth - 2)) + eDay + 1721086.5
+        var julianDay = floor(365.25 * eYear) + floor(30.59 * (eMonth - 2)) + eDay + 1721086.5
 
         if (eYear < 0) {
             julianDay -= 1
@@ -107,7 +123,6 @@ class IndianShurjoSiddhantaBongabdo: Bongabdo() {
      * Converts a Gregorian date to Bangla Date.
      */
     fun banglaDate(year: Int, month: Int, day: Int): Triple<Int, Int, Int>? {
-
         val country = "India"
         val startJD: Double = if (country == "India") {
             1938094.4629
@@ -124,7 +139,6 @@ class IndianShurjoSiddhantaBongabdo: Bongabdo() {
         val jddiff = nJD - startJD
         val lastEYear = floor(jddiff / masLen[12]).toInt()
         val mesh = startJD + lastEYear * masLen[12]
-        var lastDay = 0.0
         var beMonth = 0
         var beDay = 0
 
@@ -137,14 +151,6 @@ class IndianShurjoSiddhantaBongabdo: Bongabdo() {
             }
         }
 
-        // Generate bmonth_len as a comma-separated string of dates
-        val array = mutableListOf<String>()
-        for (i in 0 until 12) {
-            val lastday = mesh + masLen[i]
-            val nda = calData(lastday + 1)
-            val formattedDate = SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH).format(nda)
-            array.add(formattedDate)
-        }
         return Triple(lastEYear + 1, beMonth, beDay)
     }
 
@@ -153,30 +159,28 @@ class IndianShurjoSiddhantaBongabdo: Bongabdo() {
      */
     private fun calData(jd: Double): Date {
         var z1 = jd + 0.5
-        val z2 = Math.floor(z1).toInt()
+        val z2 = floor(z1).toInt()
         val f = z1 - z2
 
         var a = z2
         if (z2 >= 2299161) {
-            val alpha = Math.floor((z2 - 1867216.25) / 36524.25).toInt()
-            a = z2 + 1 + alpha - Math.floor(alpha / 4.0).toInt()
+            val alpha = floor((z2 - 1867216.25) / 36524.25).toInt()
+            a = z2 + 1 + alpha - floor(alpha / 4.0).toInt()
         }
 
         val b = a + 1524
-        val c = Math.floor((b - 122.1) / 365.25).toInt()
-        val d = Math.floor(365.25 * c).toInt()
-        val e = Math.floor((b - d) / 30.6001).toInt()
+        val c = floor((b - 122.1) / 365.25).toInt()
+        val d = floor(365.25 * c).toInt()
+        val e = floor((b - d) / 30.6001).toInt()
 
-        var day = b - d - Math.floor(30.6001 * e).toInt() + f
-        val kday = Math.floor(day).toInt()
+        val day = b - d - floor(30.6001 * e).toInt() + f
+        val kday = floor(day).toInt()
 
-        var kmon = if (e < 13.5) e - 1 else e - 13
+        val kmon = if (e < 13.5) e - 1 else e - 13
         val kyear = if (kmon > 2.5) c - 4716 else c - 4715
 
-        // Convert to Date
-        val dateStr = "${mn[kmon - 1]} ${kday}, ${kyear} 00:00:00"
+        val dateStr = "${mn[kmon - 1]} $kday, $kyear 00:00:00"
         val sdf = SimpleDateFormat("MMMM d, yyyy HH:mm:ss", Locale.ENGLISH)
         return sdf.parse(dateStr) ?: Date()
     }
-
 }

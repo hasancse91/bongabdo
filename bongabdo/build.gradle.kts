@@ -10,6 +10,7 @@ java {
 
 dependencies {
     testImplementation(libs.bundles.junitBundle)
+    implementation(libs.kotlinx.datetime)
 }
 
 tasks.test {

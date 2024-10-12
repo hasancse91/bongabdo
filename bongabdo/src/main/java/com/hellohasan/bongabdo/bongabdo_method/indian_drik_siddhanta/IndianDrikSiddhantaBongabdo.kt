@@ -11,10 +11,13 @@ import kotlin.math.floor
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
+import kotlinx.datetime.*
+
 
 /**
  * Credit: https://www.ponjika.com/jsDrik.aspx
  */
+
 internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
 
     private val d2r = PI / 180
@@ -155,12 +158,14 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
         Corr2(0.092, 3, 0, 2, -2),
     )
 
-    override fun getBongabdoData(calendar: Calendar): BongabdoData {
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val mon = calendar.get(Calendar.MONTH) + 1
-        val year = calendar.get(Calendar.YEAR)
-        val hr = calendar.get(Calendar.HOUR_OF_DAY) + calendar.get(Calendar.MINUTE) / 60.0
-        val tzone = calendar.timeZone.rawOffset / (1000.0 * 60.0 * 60.0)
+    override fun getBongabdoData(localDateTime: LocalDateTime): BongabdoData {
+        val timeZone = TimeZone.currentSystemDefault()
+        val instant = localDateTime.toInstant(timeZone)
+        val day = localDateTime.dayOfMonth
+        val mon = localDateTime.monthNumber
+        val year = localDateTime.year
+        val hr = localDateTime.hour + localDateTime.minute / 60.0
+        val tzone = timeZone.offsetAt(instant).totalSeconds / 3600.0
 
         mdy2julian(mon, day + hr / 24, year)
         val jd0 = mdy2julian(mon, day.toDouble(), year)
@@ -183,15 +188,15 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
         val dayName = mLocalizationConfig.toLocalizedNumber(bongabdoDate)
 
         val bongabdoData = BongabdoData(
-            calendar = calendar,
-            season = seasonIndex,
             year = bongabdoYear,
             month = bongabdoMonthIndex,
             day = bongabdoDate,
+            season = seasonIndex,
             seasonName = seasonName,
             yearName = yearName,
             monthName = monthName,
             dayName = dayName,
+            calendar = localDateTime
         )
 
         return bongabdoData
@@ -200,7 +205,7 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
     private fun banglaMas(jd: Double): Triple<Int, Int, Int> {
         val San = 594 - 1
         val date1 = jdToGregorian(jd + 6 / 24.0)
-        var cyear = date1.get(Calendar.YEAR)
+        var cyear = date1.year
         val pb = mdy2julian(4, 20.0, cyear) + 0.25
         val pm = poilaMas(pb)
         if (pm > jd) {
@@ -211,17 +216,17 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
         // Calculate date2, cm2, tm2
         val date2 = jdToGregorian(jd - 1 + 6 / 24.0)
         val cm2 = mdy2julian(
-            date2.get(Calendar.MONTH) + 1,
-            date2.get(Calendar.DAY_OF_MONTH).toDouble(),
-            date2.get(Calendar.YEAR)
+            date2.monthNumber,
+            date2.dayOfMonth.toDouble(),
+            date2.year
         ) + 0.25
         val tm2 = poilaMas(cm2)
 
         // Continue with cm1 and tm1
         val cm1 = mdy2julian(
-            date1.get(Calendar.MONTH) + 1,
-            date1.get(Calendar.DAY_OF_MONTH).toDouble(),
-            date1.get(Calendar.YEAR)
+            date1.monthNumber,
+            date1.dayOfMonth.toDouble(),
+            date1.year
         ) + 0.25
         val tm1 = poilaMas(cm1)
 
@@ -268,16 +273,16 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
                 val greg = jdToGregorian(jdt + 6 / 24.0)
                 val date1 = greg
                 st = mdy2julian(
-                    date1.get(Calendar.MONTH) + 1,
-                    date1.get(Calendar.DAY_OF_MONTH) + 1.25,
-                    date1.get(Calendar.YEAR)
+                    date1.monthNumber,
+                    date1.dayOfMonth + 1.25,
+                    date1.year
                 )
             }
         }
         return st
     }
 
-    private fun jdToGregorian(jd: Double): Calendar {
+    private fun jdToGregorian(jd: Double): LocalDateTime {
         val jd0 = jd + 0.5
         val z = floor(jd0)
         val f = jd0 - z
@@ -296,9 +301,7 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
         val month = if (e < 13.5) e - 1 else e - 13
         val year = if (month > 2.5) c - 4716 else c - 4715
         val day = floor(dayt).toInt()
-        val calendar = Calendar.getInstance()
-        calendar.set(year.toInt(), month.toInt() - 1, day)
-        return calendar
+        return LocalDateTime(year.toInt(), month.toInt(), day, 0, 0)
     }
 
     private fun fix360(v: Double): Double {

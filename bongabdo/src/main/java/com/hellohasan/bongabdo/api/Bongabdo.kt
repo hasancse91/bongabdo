@@ -5,6 +5,7 @@ import com.hellohasan.bongabdo.bongabdo_method.indian_drik_siddhanta.IndianDrikS
 import com.hellohasan.bongabdo.bongabdo_method.indian_shurjo_siddhanta.IndianShurjoSiddhantaBongabdo
 import com.hellohasan.bongabdo.localization_config.BengaliLocalizationConfig
 import com.hellohasan.bongabdo.localization_config.BongabdoLocalizationConfig
+import kotlinx.datetime.LocalDateTime
 import java.util.Calendar
 
 abstract class Bongabdo {
@@ -29,5 +30,5 @@ abstract class Bongabdo {
         }
     }
 
-    abstract fun getBongabdoData(calendar: Calendar): BongabdoData
+    abstract fun getBongabdoData(calendar: LocalDateTime): BongabdoData
 }

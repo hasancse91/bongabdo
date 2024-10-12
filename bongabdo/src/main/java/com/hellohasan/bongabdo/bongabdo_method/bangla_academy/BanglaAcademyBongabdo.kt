@@ -2,6 +2,11 @@ package com.hellohasan.bongabdo.bongabdo_method.bangla_academy
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.until
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
@@ -11,11 +16,11 @@ internal class BanglaAcademyBongabdo : Bongabdo() {
 
     private val banglaAcademyConfig = BanglaAcademyConfig()
 
-    override fun getBongabdoData(calendar: Calendar): BongabdoData {
+    override fun getBongabdoData(localDateTime: LocalDateTime): BongabdoData {
+        val bongabdoYear = getBongabdoYear(localDateTime)
+        val timeZone = TimeZone.currentSystemDefault()
 
-        val bongabdoYear = getBongabdoYear(calendar)
-
-        val bongabdoMonthAndDatePair = getBongabdoMonthAndDate(calendar)
+        val bongabdoMonthAndDatePair = getBongabdoMonthAndDate(localDateTime, timeZone)
 
         val bongabdoMonthIndex = bongabdoMonthAndDatePair.first
         val bongabdoDate = bongabdoMonthAndDatePair.second
@@ -23,61 +28,55 @@ internal class BanglaAcademyBongabdo : Bongabdo() {
         val seasonIndex = floor(bongabdoMonthIndex / 2.0).toInt()
 
         return BongabdoData(
-            calendar = calendar,
-            season = seasonIndex,
             year = bongabdoYear,
             month = bongabdoMonthIndex,
             day = bongabdoDate,
+            season = seasonIndex,
             seasonName = mLocalizationConfig.seasonNameList[seasonIndex],
             yearName = mLocalizationConfig.toLocalizedNumber(bongabdoYear),
             monthName = mLocalizationConfig.monthNameList[bongabdoMonthIndex],
             dayName = mLocalizationConfig.toLocalizedNumber(bongabdoDate),
+            calendar = localDateTime
         )
     }
 
-    private fun getBongabdoYear(calendar: Calendar): Int {
-        val sanitizedGregYear = sanitizeGregYear(calendar)
-
+    private fun getBongabdoYear(localDateTime: LocalDateTime): Int {
+        val sanitizedGregYear = sanitizeGregYear(localDateTime)
         return sanitizedGregYear - 593
     }
 
-    private fun getBongabdoMonthAndDate(calendar: Calendar): Pair<Int, Int> {
-        val sanitizedGregYear = sanitizeGregYear(calendar)
+    private fun getBongabdoMonthAndDate(localDateTime: LocalDateTime, timeZone: TimeZone): Pair<Int, Int> {
+        val sanitizedGregYear = sanitizeGregYear(localDateTime)
 
-        val epoch = Calendar.getInstance()
-        epoch.set(sanitizedGregYear, 3, 13, 0, 0, 0)
-        var dayRemaining = epoch.diffInDays(calendar)
+        val epoch = LocalDateTime(sanitizedGregYear, 4, 13, 0, 0, 0)
+        val instantEpoch = epoch.toInstant(timeZone)
+        val instantCurrent = localDateTime.toInstant(timeZone)
+        val dayRemaining = instantEpoch.until(instantCurrent, DateTimeUnit.DAY, timeZone).toInt()
 
         var bongabdoMonthIndex = 0
+        val monthLengthList = banglaAcademyConfig.getMonthLengthList(localDateTime.year)
+        var remainingDays = dayRemaining
 
-        val monthLengthList = banglaAcademyConfig.getMonthLengthList(calendar[Calendar.YEAR])
         for (i in monthLengthList.indices) {
-            if (dayRemaining <= monthLengthList[i]) {
+            if (remainingDays <= monthLengthList[i]) {
                 bongabdoMonthIndex = i
                 break
             }
-            dayRemaining -= monthLengthList[i]
+            remainingDays -= monthLengthList[i]
         }
 
-        val bongabdoDate = dayRemaining.toInt()
-
-        return Pair(bongabdoMonthIndex, bongabdoDate)
+        return Pair(bongabdoMonthIndex, remainingDays)
     }
 
-    private fun sanitizeGregYear(calendar: Calendar): Int {
-        val gregDate = calendar.get(Calendar.DATE)
-        val gregMonth = calendar.get(Calendar.MONTH)
-        val gregYear = calendar.get(Calendar.YEAR)
+    private fun sanitizeGregYear(localDateTime: LocalDateTime): Int {
+        val gregDate = localDateTime.dayOfMonth
+        val gregMonth = localDateTime.monthNumber
+        val gregYear = localDateTime.year
 
         // If the given date is smaller than 14th April of current Gregorian Year
-        if (gregMonth < 3 || (gregMonth == 3 && gregDate < 14)) {
-            // 3 is the index of 'April'
+        if (gregMonth < 4 || (gregMonth == 4 && gregDate < 14)) {
             return gregYear - 1
         }
         return gregYear
-    }
-
-    private fun Calendar.diffInDays(end: Calendar): Long {
-        return TimeUnit.MILLISECONDS.toDays(abs(end.timeInMillis - this.timeInMillis))
     }
 }

@@ -1,11 +1,12 @@
 package com.hellohasan.bongabdo.api
 
+import kotlinx.datetime.LocalDateTime
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 data class BongabdoData(
-    val calendar: Calendar,
+    val calendar: LocalDateTime,
     val season: Int,
     val year: Int,
     val month: Int,
