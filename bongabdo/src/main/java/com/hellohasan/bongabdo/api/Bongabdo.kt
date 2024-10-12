@@ -2,11 +2,9 @@ package com.hellohasan.bongabdo.api
 
 import com.hellohasan.bongabdo.bongabdo_method.bangla_academy.BanglaAcademyBongabdo
 import com.hellohasan.bongabdo.bongabdo_method.indian_drik_siddhanta.IndianDrikSiddhantaBongabdo
-import com.hellohasan.bongabdo.bongabdo_method.indian_shurjo_siddhanta.IndianShurjoSiddhantaBongabdo
 import com.hellohasan.bongabdo.localization_config.BengaliLocalizationConfig
 import com.hellohasan.bongabdo.localization_config.BongabdoLocalizationConfig
 import kotlinx.datetime.LocalDateTime
-import java.util.Calendar
 
 abstract class Bongabdo {
 
@@ -25,10 +23,9 @@ abstract class Bongabdo {
             return when (method) {
                 BongabdoMethod.BANGLA_ACADEMY -> BanglaAcademyBongabdo()
                 BongabdoMethod.INDIAN_DRIK_SIDDHANTA -> IndianDrikSiddhantaBongabdo()
-                BongabdoMethod.INDIAN_SHURJO_SIDDHANTA -> IndianShurjoSiddhantaBongabdo()
             }
         }
     }
 
-    abstract fun getBongabdoData(calendar: LocalDateTime): BongabdoData
+    abstract fun getBongabdoData(year: Int, month: Int, day: Int): BongabdoData
 }

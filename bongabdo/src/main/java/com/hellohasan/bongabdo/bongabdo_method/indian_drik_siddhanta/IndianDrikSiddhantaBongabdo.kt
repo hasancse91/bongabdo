@@ -158,12 +158,11 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
         Corr2(0.092, 3, 0, 2, -2),
     )
 
-    override fun getBongabdoData(localDateTime: LocalDateTime): BongabdoData {
+    override fun getBongabdoData(year: Int, month: Int, day: Int): BongabdoData {
+        val localDateTime = LocalDateTime(year, month + 1, day, 0, 0,0)
         val timeZone = TimeZone.currentSystemDefault()
         val instant = localDateTime.toInstant(timeZone)
-        val day = localDateTime.dayOfMonth
         val mon = localDateTime.monthNumber
-        val year = localDateTime.year
         val hr = localDateTime.hour + localDateTime.minute / 60.0
         val tzone = timeZone.offsetAt(instant).totalSeconds / 3600.0
 

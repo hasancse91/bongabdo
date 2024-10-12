@@ -16,7 +16,8 @@ internal class BanglaAcademyBongabdo : Bongabdo() {
 
     private val banglaAcademyConfig = BanglaAcademyConfig()
 
-    override fun getBongabdoData(localDateTime: LocalDateTime): BongabdoData {
+    override fun getBongabdoData(year: Int, month: Int, day: Int): BongabdoData {
+        val localDateTime = LocalDateTime(year, month + 1, day, 2, 0, 0)
         val bongabdoYear = getBongabdoYear(localDateTime)
         val timeZone = TimeZone.currentSystemDefault()
 

@@ -8,7 +8,4 @@ enum class BongabdoMethod {
      * It is more popular than Indian Shurjo Siddhanta method.
      * It's Indian official Bengali calendar calculation method.*/
     INDIAN_DRIK_SIDDHANTA,
-
-    /**The old Bengali calendar calculation method. Previously used in India*/
-    INDIAN_SHURJO_SIDDHANTA
 }

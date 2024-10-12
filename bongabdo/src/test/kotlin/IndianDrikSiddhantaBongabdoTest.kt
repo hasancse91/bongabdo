@@ -134,8 +134,7 @@ class IndianDrikSiddhantaBongabdoTest {
 
     private fun assertBongabdoDate(year: Int, month: Int, day: Int, expectedDate: String) {
         val bongabdo: Bongabdo = Bongabdo.getInstance(BongabdoMethod.INDIAN_DRIK_SIDDHANTA)
-        val calendar = LocalDateTime(year, month + 1, day, 2, 0, 0)
 
-        Assertions.assertEquals(expectedDate, bongabdo.getBongabdoData(calendar).getFullDate())
+        Assertions.assertEquals(expectedDate, bongabdo.getBongabdoData(year, month, day).getFullDate())
     }
 }
