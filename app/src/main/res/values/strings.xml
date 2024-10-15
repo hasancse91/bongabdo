@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Bongabdo Sample</string>
+    <string name="app_name" translatable="false">Bongabdo Sample</string>
+    <string name="bangla_academy_title">Bangla Academy (Bangladesh)</string>
+    <string name="drik_shiddhanta_title">Drik Shiddhanta (India)</string>
 </resources>
