@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrains.kotlin.jvm)
+    id("maven-publish")
 }
 
 java {
@@ -9,10 +10,20 @@ java {
 }
 
 dependencies {
-    testImplementation(libs.bundles.junitBundle)
     implementation(libs.kotlinx.datetime)
+    testImplementation(libs.bundles.junitBundle)
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.github.hasancse91"
+            artifactId = "bongabdo"
+            version = "1.0.0"
+        }
+    }
 }
