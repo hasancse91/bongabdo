@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name" translatable="false">Bongabdo Sample</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="date_picker_hints">Select a Gregorian Calendar Date</string>
+    <string name="output_hints">Output in Bongabdo Calendar</string>
     <string name="bangla_academy_title">Bangla Academy (Bangladesh)</string>
     <string name="drik_shiddhanta_title">Drik Shiddhanta (India)</string>
+    <string name="language_preference">Preferred Language</string>
+    <string name="bangla">Bengali</string>
+    <string name="english">English</string>
 </resources>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="home">হোম</string>
+    <string name="settings">সেটিংস</string>
+    <string name="date_picker_hints">গ্রেগরিয়ান ক্যালেন্ডারের একটি তারিখ নির্বাচন করুন</string>
+    <string name="output_hints">বঙ্গাব্দ ক্যালেন্ডারে আউটপুট</string>
     <string name="bangla_academy_title">বাংলা একাডেমি (বাংলাদেশ)</string>
     <string name="drik_shiddhanta_title">দৃক সিদ্ধান্ত (ভারত)</string>
+    <string name="language_preference">পছন্দনীয় ভাষা</string>
+    <string name="bangla">বাংলা</string>
+    <string name="english">ইংরেজি</string>
 </resources>
