@@ -1,9 +1,9 @@
-package com.hellohasan.bongabdosample
+package com.hellohasan.bongabdosample.screen.settings
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.ui.text.intl.Locale
 import androidx.core.os.LocaleListCompat
-import com.hellohasan.bongabdosample.screen.settings.LanguageOption
+import com.hellohasan.bongabdosample.R
 
 object LocaleManager {
 

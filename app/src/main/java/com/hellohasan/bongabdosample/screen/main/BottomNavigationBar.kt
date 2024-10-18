@@ -11,8 +11,8 @@ import androidx.navigation.NavHostController
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     NavigationBar {
-        val items = listOf(Screen.Home, Screen.Settings)
-        items.forEach { screen ->
+        val bottomNavItems = listOf(Screen.Home, Screen.Settings)
+        bottomNavItems.forEach { screen ->
             NavigationBarItem(
                 icon = { Icon(screen.icon, contentDescription = stringResource(screen.titleRes)) },
                 label = { Text(stringResource(screen.titleRes)) },

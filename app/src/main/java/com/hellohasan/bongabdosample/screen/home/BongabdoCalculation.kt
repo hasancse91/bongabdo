@@ -6,7 +6,7 @@ import com.hellohasan.bongabdo.api.BongabdoMethod
 import com.hellohasan.bongabdo.localization_config.BengaliLocalizationConfig
 import com.hellohasan.bongabdo.localization_config.BongabdoLocalizationConfig
 import com.hellohasan.bongabdo.localization_config.EnglishLocalizationConfig
-import com.hellohasan.bongabdosample.LocaleManager
+import com.hellohasan.bongabdosample.screen.settings.LocaleManager
 import java.text.SimpleDateFormat
 import java.util.Locale
 
