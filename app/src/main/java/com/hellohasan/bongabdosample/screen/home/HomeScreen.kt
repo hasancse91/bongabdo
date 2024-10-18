@@ -18,12 +18,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hellohasan.bongabdosample.R
+import com.hellohasan.bongabdosample.screen.home.BongabdoCalculation.getBanglaAcademyBongabdo
+import com.hellohasan.bongabdosample.screen.home.BongabdoCalculation.getDateString
+import com.hellohasan.bongabdosample.screen.home.BongabdoCalculation.getDrikShiddhantaBongabdo
 
 @Composable
 fun HomeScreen() {
     val context = LocalContext.current
     var calendarState by remember { mutableStateOf(Calendar.getInstance()) }
-
     var selectedDate by remember { mutableStateOf(getDateString(calendarState)) }
 
     val datePickerDialog = android.app.DatePickerDialog(
