@@ -12,6 +12,11 @@ import java.util.Locale
 
 object BongabdoCalculation {
 
+    /**
+     * There are two available calculation methods: [BongabdoMethod.BANGLA_ACADEMY] and [BongabdoMethod.INDIAN_DRIK_SIDDHANTA] available in our library.
+     * But you can extend [Bongabdo] class and implement your own logic inside [getBongabdoData] method.
+     * Example: [SurjaShiddhantaBongabdo]
+     */
     fun getBanglaAcademyBongabdo(calendar: Calendar): String {
         val bongabdo = Bongabdo.getInstance(BongabdoMethod.BANGLA_ACADEMY)
         bongabdo.mLocalizationConfig = getLocalizationConfig()
@@ -37,6 +42,7 @@ object BongabdoCalculation {
     /**
      * You can implement your own localisation config class for Hindi, Arabic or any other language.
      * Just create a subclass of [BongabdoLocalizationConfig]. Then return it from this method.
+     * Example: [HindiLocalisationConfig]
      * */
     private fun getLocalizationConfig(): BongabdoLocalizationConfig {
         return if (LocaleManager.getCurrentLocale().language == "bn")
