@@ -52,8 +52,7 @@ android {
 
 dependencies {
 
-//    implementation(project(":bongabdo"))
-    implementation(libs.bongabdo)
+    implementation(project(":bongabdo"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

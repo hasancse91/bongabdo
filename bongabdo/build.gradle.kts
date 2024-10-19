@@ -20,11 +20,11 @@ tasks.test {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
+        create<MavenPublication>("maven") {
             groupId = "com.github.hasancse91"
             artifactId = "bongabdo"
-            version = "0.0.2"
-            from(components["java"])
+            version = "0.0.3"
+            from(components["kotlin"])
         }
     }
 }
