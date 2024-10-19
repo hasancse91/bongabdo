@@ -1,6 +1,6 @@
-name: Unit Tests
+name: Unit Tests for Bongabdo Library
 
-# Trigger the workflow on pull request creation, pull request update, or push to main branch.
+# Trigger the workflow on pull request creation or push to main branch.
 on:
   pull_request:
     branches:
@@ -18,14 +18,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Set up JDK 11 for Kotlin/Java projects (you can adjust the version if necessary)
+      # Cache the JDK 17
+      - name: Cache JDK 17
+        uses: actions/cache@v3
+        id: jdk-cache
+        with:
+          path: |
+            ~/.sdkman/candidates/java
+          key: ${{ runner.os }}-jdk-17
+          restore-keys: |
+            ${{ runner.os }}-jdk-
+
+      # If JDK 17 is not found in cache, install it
       - name: Set up JDK 17
+        if: steps.jdk-cache.outputs.cache-hit != 'true'
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # Cache Gradle dependencies (Optional, but improves build speed)
+      # Cache Gradle dependencies
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -34,23 +46,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      # Run unit tests
-      - name: Run Unit Tests
-        run: ./gradlew test
+      # Run unit tests only for the 'bongabdo' library module
+      - name: Run Bongabdo Unit Tests
+        run: ./gradlew :bongabdo:test
 
-      # Archive test results for inspection (optional step to store test reports)
+      # Archive test results for inspection (optional)
       - name: Archive test results
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: build/test-results/test/
+          path: bongabdo/build/test-results/test/
 
-      # Publish test results to the pull request (Optional)
+      # Publish test results to the pull request (optional)
       - name: Publish Test Results
         if: always()
         uses: mikepenz/action-junit-report@v3
         with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
-          check_name: 'Unit Test Results'
+          report_paths: '**/bongabdo/build/test-results/test/TEST-*.xml'
+          check_name: 'Unit Test Results for Bongabdo Library'
           fail_on_failure: true
