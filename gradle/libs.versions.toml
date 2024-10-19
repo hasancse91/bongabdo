@@ -13,9 +13,11 @@ jetbrainsKotlinJvm = "1.9.0"
 materialIconsExtended = "1.7.3"
 navigationCompose = "2.8.2"
 appcompat = "1.7.0"
+bongabdo = "0.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+bongabdo = { module = "com.github.hasancse91:bongabdo", version.ref = "bongabdo" }
 junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitJupiter" }
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitJupiter" }
 junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junitJupiter" }
