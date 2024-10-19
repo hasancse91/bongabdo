@@ -38,10 +38,6 @@ You can start using the library by creating an instance of the Bongabdo class an
 
 Example: Convert a Gregorian Date to Bengali Date (Bangla Academy Method)
 ```kotlin
-import kotlinx.datetime.LocalDateTime
-import com.github.hasancse91.bongabdo.Bongabdo
-import com.github.hasancse91.bongabdo.BongabdoMethod
-
 fun main() {
     val bongabdo = Bongabdo.getInstance(BongabdoMethod.BANGLA_ACADEMY)
     val result = bongabdo.getBongabdoData(year = 2014, month = 3, day = 14) // 14 Apr 2024
