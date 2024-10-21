@@ -23,7 +23,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "com.github.hasancse91"
             artifactId = "bongabdo"
-            version = "0.0.3"
+            version = "1.0.0"
             from(components["kotlin"])
         }
     }
