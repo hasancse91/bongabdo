@@ -1,7 +1,7 @@
 # Bongabdo - A Bengali Calendar Converter Library
 
-![Unit Tests](https://github.com/hasancse91/bongabdo/actions/workflows/github-actions.yml/badge.svg) [![](https://jitpack.io/v/hasancse91/bongabdo.svg)](https://jitpack.io/#hasancse91/bongabdo)
-
+![Unit Tests](https://github.com/hasancse91/bongabdo/actions/workflows/github-actions.yml/badge.svg) 
+[![](https://jitpack.io/v/hasancse91/bongabdo.svg)](https://jitpack.io/#hasancse91/bongabdo)
 
 Bongabdo is a powerful Kotlin library that simplifies converting Gregorian dates to Bengali calendar dates (Bongabdo) for your Android or Java/Kotlin projects. It provides flexibility for regional variations and offers customization options.
 
