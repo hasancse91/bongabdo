@@ -1,4 +1,4 @@
-package com.hellohasan.bongabdo.bongabdo_method.bangla_academy
+package com.hellohasan.bongabdo.methods.banglaAcademy
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
@@ -7,9 +7,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.until
-import java.util.Calendar
-import java.util.concurrent.TimeUnit
-import kotlin.math.abs
 import kotlin.math.floor
 
 internal class BanglaAcademyBongabdo : Bongabdo() {
@@ -33,10 +30,10 @@ internal class BanglaAcademyBongabdo : Bongabdo() {
             month = bongabdoMonthIndex,
             day = bongabdoDate,
             season = seasonIndex,
-            seasonName = mLocalizationConfig.seasonNameList[seasonIndex],
-            yearName = mLocalizationConfig.toLocalizedNumber(bongabdoYear),
-            monthName = mLocalizationConfig.monthNameList[bongabdoMonthIndex],
-            dayName = mLocalizationConfig.toLocalizedNumber(bongabdoDate),
+            seasonName = localizationConfig.seasonNameList[seasonIndex],
+            yearName = localizationConfig.toLocalizedNumber(bongabdoYear),
+            monthName = localizationConfig.monthNameList[bongabdoMonthIndex],
+            dayName = localizationConfig.toLocalizedNumber(bongabdoDate),
             calendar = localDateTime
         )
     }

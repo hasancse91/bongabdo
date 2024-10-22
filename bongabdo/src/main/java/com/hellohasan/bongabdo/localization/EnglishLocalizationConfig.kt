@@ -1,4 +1,4 @@
-package com.hellohasan.bongabdo.localization_config
+package com.hellohasan.bongabdo.localization
 
 class EnglishLocalizationConfig : BongabdoLocalizationConfig() {
 

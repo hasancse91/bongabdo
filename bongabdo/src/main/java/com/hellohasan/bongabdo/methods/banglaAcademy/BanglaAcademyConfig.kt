@@ -1,4 +1,4 @@
-package com.hellohasan.bongabdo.bongabdo_method.bangla_academy
+package com.hellohasan.bongabdo.methods.banglaAcademy
 
 internal class BanglaAcademyConfig  {
 
