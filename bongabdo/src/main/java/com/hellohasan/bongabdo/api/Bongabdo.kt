@@ -18,6 +18,7 @@ abstract class Bongabdo {
          * But if you need any other calculation method, just extend [Bongabdo] class and implement
          * your own logic inside [getBongabdoData] method.
          */
+        @JvmStatic
         fun getInstance(method: BongabdoMethod): Bongabdo {
             return when (method) {
                 BongabdoMethod.BANGLA_ACADEMY -> BanglaAcademyBongabdo()
