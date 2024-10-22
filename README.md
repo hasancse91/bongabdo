@@ -3,7 +3,7 @@
 ![Unit Tests](https://github.com/hasancse91/bongabdo/actions/workflows/github-actions.yml/badge.svg) 
 [![](https://jitpack.io/v/hasancse91/bongabdo.svg)](https://jitpack.io/#hasancse91/bongabdo)
 
-Bongabdo is a powerful Kotlin library that simplifies converting Gregorian dates to Bengali calendar dates (Bongabdo) for your Android or Java/Kotlin projects. It provides flexibility for regional variations and offers customization options.
+Bongabdo is a powerful Kotlin library that simplifies converting Gregorian dates to Bengali calendar dates (Bongabdo) for your Android or Java/Kotlin projects. It provides flexibility for regional variations and offers customization options. Check the Android sample project implementation. [From here](https://github.com/jamilxt/bongabdo-demo) you will find Spring Boot sample implementation.
 
 <img src="https://raw.githubusercontent.com/hasancse91/bongabdo/main/sample_data/sample-app-screenshot.jpeg" width="280" alt="bongabdo calendar library sample"/>
 
@@ -118,7 +118,7 @@ class SurjaShiddhantaBongabdo : Bongabdo() {
 
 fun main() {
     val bongabdo = SurjaShiddhantaBongabdo() // your implemented class
-    bongabdo.mLocalizationConfig = HindiLocalisationConfig() // you cat use your own localization class
+    bongabdo.localizationConfig = HindiLocalisationConfig() // you can use your own localization class
     val bongabdoData = bongabdo.getBongabdoData(2014, 3, 14)
 
     println(bongabdoData.getFullDate())
