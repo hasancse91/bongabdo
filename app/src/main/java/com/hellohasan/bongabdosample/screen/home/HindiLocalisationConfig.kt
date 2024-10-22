@@ -1,6 +1,6 @@
 package com.hellohasan.bongabdosample.screen.home
 
-import com.hellohasan.bongabdo.localization_config.BongabdoLocalizationConfig
+import com.hellohasan.bongabdo.localization.BongabdoLocalizationConfig
 
 class HindiLocalisationConfig : BongabdoLocalizationConfig() {
     override val digitMap: Map<Int, String>

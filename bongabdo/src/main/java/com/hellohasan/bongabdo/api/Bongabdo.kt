@@ -1,13 +1,13 @@
 package com.hellohasan.bongabdo.api
 
-import com.hellohasan.bongabdo.bongabdo_method.bangla_academy.BanglaAcademyBongabdo
-import com.hellohasan.bongabdo.bongabdo_method.indian_drik_siddhanta.IndianDrikSiddhantaBongabdo
-import com.hellohasan.bongabdo.localization_config.BengaliLocalizationConfig
-import com.hellohasan.bongabdo.localization_config.BongabdoLocalizationConfig
+import com.hellohasan.bongabdo.localization.BengaliLocalizationConfig
+import com.hellohasan.bongabdo.localization.BongabdoLocalizationConfig
+import com.hellohasan.bongabdo.methods.banglaAcademy.BanglaAcademyBongabdo
+import com.hellohasan.bongabdo.methods.indianDrikSiddhanta.IndianDrikSiddhantaBongabdo
 
 abstract class Bongabdo {
 
-    var mLocalizationConfig: BongabdoLocalizationConfig = BengaliLocalizationConfig()
+    var localizationConfig: BongabdoLocalizationConfig = BengaliLocalizationConfig()
 
     companion object {
 

@@ -1,4 +1,4 @@
-package com.hellohasan.bongabdo.localization_config
+package com.hellohasan.bongabdo.localization
 
 /**
  * To take implementation inspiration check [BengaliLocalizationConfig] class.

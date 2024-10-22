@@ -1,8 +1,11 @@
-package com.hellohasan.bongabdo.bongabdo_method.indian_drik_siddhanta
+package com.hellohasan.bongabdo.methods.indianDrikSiddhanta
 
 import com.hellohasan.bongabdo.api.Bongabdo
 import com.hellohasan.bongabdo.api.BongabdoData
-import java.util.Calendar
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.offsetAt
+import kotlinx.datetime.toInstant
 import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.atan
@@ -11,7 +14,6 @@ import kotlin.math.floor
 import kotlin.math.sin
 import kotlin.math.sqrt
 import kotlin.math.tan
-import kotlinx.datetime.*
 
 
 /**
@@ -181,10 +183,10 @@ internal class IndianDrikSiddhantaBongabdo : Bongabdo() {
         val (bongabdoDate: Int, bongabdoMonthIndex: Int, bongabdoYear: Int) = banglaMas(bjd)
 
         val seasonIndex = (floor(bongabdoMonthIndex / 2.0).toInt()) % 6
-        val seasonName = mLocalizationConfig.seasonNameList[seasonIndex]
-        val yearName = mLocalizationConfig.toLocalizedNumber(bongabdoYear)
-        val monthName = mLocalizationConfig.monthNameList[bongabdoMonthIndex]
-        val dayName = mLocalizationConfig.toLocalizedNumber(bongabdoDate)
+        val seasonName = localizationConfig.seasonNameList[seasonIndex]
+        val yearName = localizationConfig.toLocalizedNumber(bongabdoYear)
+        val monthName = localizationConfig.monthNameList[bongabdoMonthIndex]
+        val dayName = localizationConfig.toLocalizedNumber(bongabdoDate)
 
         val bongabdoData = BongabdoData(
             year = bongabdoYear,
