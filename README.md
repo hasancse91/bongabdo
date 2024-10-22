@@ -3,8 +3,14 @@
 ![Unit Tests](https://github.com/hasancse91/bongabdo/actions/workflows/github-actions.yml/badge.svg) 
 [![](https://jitpack.io/v/hasancse91/bongabdo.svg)](https://jitpack.io/#hasancse91/bongabdo)
 
-Bongabdo is a powerful Kotlin library that simplifies converting Gregorian dates to Bengali calendar dates (Bongabdo) for your Android or Java/Kotlin projects. It provides flexibility for regional variations and offers customization options. Check the Android sample project implementation. [From here](https://github.com/jamilxt/bongabdo-demo) you will find Spring Boot sample implementation.
+Bongabdo is a powerful Kotlin library that simplifies converting Gregorian dates to Bengali calendar dates (Bongabdo) for your Android or Java/Kotlin projects. It provides flexibility for regional variations and offers customization options.
 
+## Implementation:
+- Android (Clone this repo to check the sample app)
+- [Spring Boot (Kotlin)](https://github.com/jamilxt/bongabdo-demo)
+- [Spring Boot (Java)](https://github.com/jamilxt/bongabdo-demo/tree/java)
+
+## Demo (Android):
 <img src="https://raw.githubusercontent.com/hasancse91/bongabdo/main/sample_data/sample-app-screenshot.jpeg" width="280" alt="bongabdo calendar library sample"/>
 
 ## Key Features:
@@ -70,7 +76,7 @@ Bongabdo supports both English and Bengali locales. English is our default local
 
 **Bengali Localization**
 ```kotlin
-bongabdo.mLocalizationConfig = BengaliLocalizationConfig()
+bongabdo.localizationConfig = BengaliLocalizationConfig()
 ```
 #### Custom Localization (e.g., Hindi)
 You can extend the BongabdoLocalizationConfig class to add your own localization support.
@@ -86,7 +92,7 @@ class HindiLocalisationConfig : BongabdoLocalizationConfig() {
 
 fun main() {
     val bongabdo = Bongabdo.getInstance(BongabdoMethod.BANGLA_ACADEMY)
-    bongabdo.mLocalizationConfig = HindiLocalisationConfig()
+    bongabdo.localizationConfig = HindiLocalisationConfig()
     val bongabdoData = bongabdo.getBongabdoData(2014, 3, 14)
 
     println(bongabdoData.getFullDate())
