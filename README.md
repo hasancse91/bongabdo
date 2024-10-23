@@ -222,5 +222,11 @@ We appreciate your contributions and will review your pull requests as soon as p
 #### Special thanks 
 A special thanks to [Shafayat Hossain Khan](https://www.linkedin.com/in/shafayat-hossain-khan/) for his significant contributions to this project.
 
+----
+#### Reference
+1. [Ponjika.com](https://www.ponjika.com/tools.aspx)
+2. [BD News 24](https://bangla.bdnews24.com/bangladesh/article1677502.bdnews)
+3. [Prothom Alo](https://www.prothomalo.com/bangladesh/বদলে-যাচ্ছে-বাংলা-বর্ষপঞ্জি)
+
 #### License
 This project is licensed under the MIT License. See the LICENSE file for details.
