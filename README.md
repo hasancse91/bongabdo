@@ -11,7 +11,7 @@ Bongabdo is a powerful Kotlin library that simplifies converting Gregorian dates
 - [Spring Boot (Java)](https://github.com/jamilxt/bongabdo-demo/tree/java)
 
 ## Demo (Android):
-<img src="https://raw.githubusercontent.com/hasancse91/bongabdo/main/sample_data/sample-app-screenshot.jpeg" width="280" alt="bongabdo calendar library sample"/>
+<img src="https://raw.githubusercontent.com/hasancse91/bongabdo/refs/heads/main/sample_data/sample-app-screenshot.jpeg" width="280" alt="bongabdo calendar library sample"/>
 
 ## Key Features:
 
