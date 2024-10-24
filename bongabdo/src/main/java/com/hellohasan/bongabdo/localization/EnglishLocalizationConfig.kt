@@ -16,18 +16,18 @@ class EnglishLocalizationConfig : BongabdoLocalizationConfig() {
     )
 
     override val monthNameList: List<String> = listOf(
-        "Baishakh",
-        "Jaishtha",
+        "Boishakh",
+        "Jyoishtho",
         "Asharh",
-        "Sraban",
-        "Vadra",
-        "Ashwin",
-        "Karkik",
-        "Agrahayan",
-        "Paush",
+        "Shrabon",
+        "Bhadro",
+        "Ashshin",
+        "Kartik",
+        "Ogrohayon",
+        "Poush",
         "Magh",
         "Falgun",
-        "Chaitra"
+        "Choitro"
     )
 
     override val seasonNameList: List<String> = listOf(
